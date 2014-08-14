@@ -1,0 +1,59 @@
+<h1></h1>
+
+<h3 class="news-header red">Decision Tree - {{questions.sections[currentSection].name}}</h3>
+
+	<div class="tabs clearfix">
+			<span ng-repeat="sec in questions.sections" ng-click="sectionchange($index+1)" ng-class="{tabactive:questions.sections[currentSection].name==sec.name}">
+				{{sec.name}}
+			</span>
+	</div>
+
+
+<div id="q-r-wrap" class="clearfix">
+	<!-- resultat -->
+	<div id="result-bubble" ng-show="resultmode" >	
+		<p>Resultat: {{questions.sections[currentSection].results[currentResultat]}}</p>
+	</div>
+	<!-- the end of resultat -->
+
+	<!-- current Question -->
+	<div id="question-bubble" ng-show="questionmode" >
+		<p ng-bind-html="questions.sections[currentSection].questions[currentQuestion].Q"></p>
+		<button ng-click = "clickyes()">YES</button>
+		<button ng-click = "clickno()">NO</button>
+		<!--<button ng-click ="gotoprevious()">go to the previous question</button>-->
+	</div>
+	<!-- the end of current question -->
+</div>
+
+
+
+
+
+
+<!-- helper section -->
+<div id="tree-foot">
+	<a href="#">link1</a>
+	<a href="#">link2</a>
+</div>
+
+
+
+
+
+
+
+<!--<div ng-repeat="item in questions.sections">
+
+  {{item.name}}
+  <hr/>
+  <ul ng-repeat="o in item.questions">
+    <li>{{o.Q}} {{o.Y}} {{o.N}}</li>
+  </ul>
+
+
+</div>-->
+
+
+
+<!--{{currentQuestions}}-->
