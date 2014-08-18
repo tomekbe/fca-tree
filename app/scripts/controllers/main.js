@@ -11,6 +11,8 @@ angular.module('fcaTreeApp')
 
     	//$scope.currentQuestions="questions.sections.section1.name";
    		
+      $scope.appReady = false;
+
       $scope.resultmode = false
       $scope.questionmode = true;
 
@@ -30,12 +32,11 @@ angular.module('fcaTreeApp')
       // controllers for YES 
     	$scope.clickyes  = function() {
     		var cString =	($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y).charAt(0);
-    		//console.log(cString);
+    		
 
     		if(cString =="Q") {
           $scope.steps.push({"cS":$scope.currentSection,"cQ":$scope.currentQuestion})
-    			
-          $scope.currentQuestion=$scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y;
+    			$scope.currentQuestion=$scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y;
     		
         } else if(cString =="R") {
     			
@@ -45,12 +46,11 @@ angular.module('fcaTreeApp')
 
     		} else if(cString =="_") {
 
-    			//alert("_nextSection")
           if($scope.sectionNumber<$scope.totalSections) {
-           $scope.sectionNumber++;
+            $scope.sectionNumber++;
           }
-          $scope.currentSection="section"+$scope.sectionNumber;
-          $scope.currentQuestion="Q1";
+            $scope.currentSection="section"+$scope.sectionNumber;
+            $scope.currentQuestion="Q1";
 
     		}
 
@@ -60,7 +60,7 @@ angular.module('fcaTreeApp')
     	$scope.clickno = function () {
 
     		var cString =	($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N).charAt(0);
-    		//console.log(cString);
+    		
 
     		if(cString=="Q") {
           $scope.steps.push({"cS":$scope.currentSection,"cQ":$scope.currentQuestion})
@@ -70,17 +70,17 @@ angular.module('fcaTreeApp')
     		} else if(cString =="R") {
           $scope.resultmode = true; $scope.questionmode = false;
           $scope.currentResultat =$scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N
-    			//alert("resultat")
+    			
 
     		} else if(cString =="_") {
  
-    			//alert("_nextSectionN")
+    			
           if($scope.sectionNumber<$scope.totalSections) {
             $scope.sectionNumber++;
           }
           $scope.currentSection="section"+$scope.sectionNumber;
     			$scope.currentQuestion="Q1";
-          //console.log($scope.sectionNumber,  $scope.currentSection);
+          
     		}
 
     	}
@@ -120,14 +120,14 @@ angular.module('fcaTreeApp')
        	 
 
        	 questionService.getQuestions().success(function (response) {
-       	
+       	    $scope.appReady = true;
        	 		$scope.questions = response;
        	 		//$scope.currentSection=response.sections.section1
 
 
      
        
-       })
+       });
 
 
   });

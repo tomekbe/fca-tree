@@ -1,31 +1,35 @@
-<h1></h1>
+
 
 <h3 class="news-header red">Decision Tree - {{questions.sections[currentSection].name}}</h3>
 
-	<div class="tabs clearfix">
-			<span ng-repeat="sec in questions.sections" ng-click="sectionchange($index+1)" ng-class="{tabactive:questions.sections[currentSection].name==sec.name}">
-				{{sec.name}}
-			</span>
-	</div>
+<div ng-show="appReady">
+			<div class="tabs clearfix">
+					<span ng-repeat="sec in questions.sections" ng-click="sectionchange($index+1)" ng-class="{tabactive:questions.sections[currentSection].name==sec.name}">
+						{{sec.name}}
+					</span>
+			</div>
 
 
-<div id="q-r-wrap" class="clearfix">
-	<!-- resultat -->
-	<div id="result-bubble" ng-show="resultmode" >	
-		<p>Resultat: {{questions.sections[currentSection].results[currentResultat]}}</p>
-	</div>
-	<!-- the end of resultat -->
+		<div id="q-r-wrap" class="clearfix" >
+			<!-- resultat -->
+			<div id="result-bubble" ng-show="resultmode" >	
+				<p ng-bind-html="questions.sections[currentSection].results[currentResultat]"></p>
+			</div>
+			<!-- the end of resultat -->
 
-	<!-- current Question -->
-	<div id="question-bubble" ng-show="questionmode" >
-		<p ng-bind-html="questions.sections[currentSection].questions[currentQuestion].Q"></p>
-		<button ng-click = "clickyes()">YES</button>
-		<button ng-click = "clickno()">NO</button>
-		<!--<button ng-click ="gotoprevious()">go to the previous question</button>-->
-	</div>
-	<!-- the end of current question -->
+			<!-- current Question -->
+			<div id="question-bubble" ng-show="questionmode" >
+				<p ng-bind-html="questions.sections[currentSection].questions[currentQuestion].Q"></p>
+				<button ng-click = "clickyes()" class="btn btn-small">YES</button>
+				<button ng-click = "clickno()" class="btn btn-small">NO</button>
+				<!--<button ng-click ="gotoprevious()">go to the previous question</button>-->
+			</div>
+			<!-- the end of current question -->
+		</div>
+
 </div>
 
+<div ng-show="!appReady"> <p>Loading the content...</p></div>
 
 
 
