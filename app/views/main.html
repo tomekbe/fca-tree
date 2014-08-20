@@ -1,34 +1,59 @@
 
 
-<h3 class="news-header red">Decision Tree - {{questions.sections[currentSection].name}}</h3>
-
+<h3 class="news-header red">Decision Tree</h3>
+<!--{{questions.sections[currentSection].name}}-->
+<!-- App screen -->
 <div ng-show="appReady">
-			<div class="tabs clearfix">
-					<span ng-repeat="sec in questions.sections" ng-click="sectionchange($index+1)" ng-class="{tabactive:questions.sections[currentSection].name==sec.name}">
+			<div class="tabs clearfix" >
+					<span ng-repeat="sec in questions.sections" ng-click="sectionchange($index+1)" 
+						  ng-class="{tabactive:questions.sections[currentSection].name==sec.name,
+							   		 tabinactive:questions.sections[currentSection].name!==sec.name}">
 						{{sec.name}}
 					</span>
 			</div>
 
 
-		<div id="q-r-wrap" class="clearfix" >
+		<div id="q-r-wrap" class="clearfix">
 			<!-- resultat -->
-			<div id="result-bubble" ng-show="resultmode" >	
-				<p ng-bind-html="questions.sections[currentSection].results[currentResultat]"></p>
+			<div id="result-bubble" ng-hide="questionmode" class="animate-show">	
+				<p ng-bind-html="questions.sections[currentSection].results[currentResultat]" style="font-weight:bold"></p>
+				<div ng-show="resultFullOrLimited">
+					<p><b>Now you’ve completed our decision tool, go through either our full permission or limited permission checklist to help you prepare for your application.If you are still unsure about what permission to apply for, please call us on 0845 606 9966.</b></p>
+					<p><b>You may also have the option to become an appointed representative as long as you are not: entering into a regulated credit agreement as a lender (or exercising the lender’s rights and duties in relation to agreements) under which interest or any other charges are applied; or providing credit references. See our jargon buster for more information.</b></p>
+					<p> This tool is designed to help you decide whether you need to apply for limited or full permission. However it is not a definitive statement of the law, for which you should refer to paragraph 2G of Schedule 6 to the Financial Services and Markets Act 2000. For more
+	guidance see the relevant sections of the FCA Handbook (in particular COND 1.1A.5A) and
+	consider seeking independent legal or compliance advice.</p>
+				</div>
+
 			</div>
 			<!-- the end of resultat -->
 
 			<!-- current Question -->
-			<div id="question-bubble" ng-show="questionmode" >
+			<div id="question-bubble" ng-show="questionmode" class="animate-show"> 
 				<p ng-bind-html="questions.sections[currentSection].questions[currentQuestion].Q"></p>
 				<button ng-click = "clickyes()" class="btn btn-small">YES</button>
 				<button ng-click = "clickno()" class="btn btn-small">NO</button>
 				<!--<button ng-click ="gotoprevious()">go to the previous question</button>-->
 			</div>
 			<!-- the end of current question -->
+			<div id="tree-info">
+				<ul>
+					<li>When we refer to "you", we’re referring to your firm. </li>
+					<li>If you are a local authority, this tree does not apply to you. Please visit our webpage to find out whether you will need to be authorised: fca.org.uk/creditready</li>
+					<li>You will have the option to become an appointed representative as long as you are not: entering into regulated credit agreements as a lender (or exercising the lender’s rights and duties in relation to agreements) under which interest or any other charges are applied; or providing credit references</li>
+					<li>This decision tree applies if you intend on carrying on credit-related activities only and no other non-credit regulated activities (unless you carry these on as an appointed representative). If you intend to carry on any other regulated activity and you are not currently authorised, you should apply in the normal way for authorisation to carry out the non-credit activities and complete the consumer credit supplement form. If you are already authorised by the FCA or PRA for other regulated activities, you should apply for a variation of permission.</li>
+					<li>If any of your answers are full permission you will need to apply for full permission, even if some of your activities would otherwise qualify for limited permission
+					</li>
+
+				</ul>
+
+			</div>
+
 		</div>
 
 </div>
 
+<!-- App loading screen -->
 <div ng-show="!appReady"> <p>Loading the content...</p></div>
 
 
@@ -36,11 +61,12 @@
 
 
 <!-- helper section -->
+<!--
 <div id="tree-foot">
 	<a href="#">link1</a>
 	<a href="#">link2</a>
 </div>
-
+-->
 
 
 

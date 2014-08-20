@@ -4,7 +4,8 @@ angular.module('fcaTreeApp.questionService',[]).factory('questionService', funct
 	 factory.getQuestions = function() {
       return $http({
         method: 'JSONP', 
-		url: 'http://pizg.net/tests/decision.php?callback=JSON_CALLBACK'
+		//url: 'http://pizg.net/tests/decision.php?callback=JSON_CALLBACK'
+		url: 'http://view-it.co.uk/services/fca/decision_2.php?callback=JSON_CALLBACK'
       });
     }
 

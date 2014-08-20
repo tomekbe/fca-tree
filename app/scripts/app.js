@@ -4,7 +4,9 @@ angular.module('fcaTreeApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
+    'ngAnimate',
     'ngRoute',
+
     'fcaTreeApp.questionService',
     'fcaTreeApp.directives'
 
