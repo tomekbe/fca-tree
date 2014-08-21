@@ -1,146 +1,125 @@
+/*global $:false */
 'use strict';
 
 angular.module('fcaTreeApp')
 	.controller('MainCtrl', function ($scope,questionService) {
-	    
-	  
+    
+    $scope.appReady = false;
+    $scope.resultmode = false;
+    $scope.questionmode = true;
+    $scope.resultFullOrLimited = false;
+    // start with section1 by default;
+    $scope.steps = [];
+    $scope.totalSections = 7;
+    $scope.sectionNumber = 1;
+    $scope.currentSection='section'+$scope.sectionNumber;
 
-    	//$scope.currentQuestions="questions.sections.section1.name";
-   		
-      $scope.appReady = false;
-
-      $scope.resultmode = false;
-      $scope.questionmode = true;
-
-      $scope.resultFullOrLimited = false;
+    //start with question1 by default;
+    $scope.currentQuestion ='Q1';
+    $scope.currentResultat = '';
 
 
-
-    	// start with section1 by default;
-
-      $scope.steps = new Array();
-
-      $scope.totalSections = 7;
-      $scope.sectionNumber = 1;
-   		$scope.currentSection="section"+$scope.sectionNumber;
-   		//start with question1 by default;
-   		$scope.currentQuestion ="Q1"
-
-   		$scope.currentResultat = "";
-    	
-   $scope.$watch('currentSection', function() { sectionTransition() });
+    // Watch section 
+    $scope.$watch('currentSection', function() { sectionTransition(); });
+    
+    // controllers for YES BUTTON
+    $scope.clickyes  = function() {
+        var cString =	($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y).charAt(0);
+        var cString2 =($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y).charAt(1);
         
-     
-
-      // controllers for YES 
-    	$scope.clickyes  = function() {
-    		var cString =	($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y).charAt(0);
-        var cString_2 =($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y).charAt(1);
-    		
-
-    		if(cString =="Q") {
-          $scope.steps.push({"cS":$scope.currentSection,"cQ":$scope.currentQuestion})
-    			$scope.currentQuestion=$scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y;
+        if(cString ==='Q') {
+        //$scope.steps.push({"cS":$scope.currentSection,"cQ":$scope.currentQuestion})
+          $scope.currentQuestion=$scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y;
           questionTransition();
-    		
-        } else if(cString =="R") {
-    			
-          $scope.resultmode = true; $scope.questionmode = false;
+
+        } else if(cString ==='R') {
+          $scope.resultmode = true;
+          $scope.questionmode = false;
       
-          if((cString_2=="F")|| (cString_2=="L")){
-              
-               $scope.resultFullOrLimited= true;
+          if((cString2==='F')|| (cString2==='L')){
+            $scope.resultFullOrLimited = true;
           } else {
-                 $scope.resultFullOrLimited= false;
+            $scope.resultFullOrLimited = false;
           }
           
-          $scope.currentResultat =$scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y
-    		  resultatTransition();
+          $scope.currentResultat =$scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y;
+          resultatTransition();
 
-    		} else if(cString =="_") {
+        } else if(cString ==='_') {
 
           if($scope.sectionNumber<$scope.totalSections) {
             $scope.sectionNumber++;
           }
-            $scope.currentSection="section"+$scope.sectionNumber;
-            $scope.currentQuestion="Q1";
-            sectionTransition()
+          $scope.currentSection='section'+$scope.sectionNumber;
+          $scope.currentQuestion='Q1';
+          sectionTransition();
+        }
+      };
 
-    		}
+      // controller for NO BUTTON
+    $scope.clickno = function () {
+        var cString =	($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N).charAt(0);
+        var cString2 =($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N).charAt(1);
 
-    	}
-
-      // controller for NO section
-    	$scope.clickno = function () {
-
-    		var cString =	($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N).charAt(0);
-        var cString_2 =($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N).charAt(1);
-    		
-
-    		if(cString=="Q") {
-          $scope.steps.push({"cS":$scope.currentSection,"cQ":$scope.currentQuestion})
-    			
+        if(cString==='Q') {
+          //$scope.steps.push({"cS":$scope.currentSection,"cQ":$scope.currentQuestion})
           $scope.currentQuestion=$scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N;
           questionTransition();
 
-    		} else if(cString =="R") {
-          $scope.resultmode = true; $scope.questionmode = false;
+        } else if(cString ==='R') {
+          $scope.resultmode = true;
+          $scope.questionmode = false;
 
-            if((cString_2=="F")||(cString_2=="L")){
-              
-              $scope.resultFullOrLimited= true;
-           } else {
-                 $scope.resultFullOrLimited= false;
-           }
-          $scope.currentResultat =$scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N
-    			
+          if((cString2==='F')||(cString2==='L')){
+            $scope.resultFullOrLimited= true;
+          } else {
+            $scope.resultFullOrLimited= false;
+          }
+
+          $scope.currentResultat =$scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N;
           resultatTransition();
 
-    		} else if(cString =="_") {
- 
-    			
+        } else if(cString ==='_') {
+
           if($scope.sectionNumber<$scope.totalSections) {
             $scope.sectionNumber++;
           }
-          $scope.currentSection="section"+$scope.sectionNumber;
-    			$scope.currentQuestion="Q1";
-          sectionTransition()
-          
-    		}
+          $scope.currentSection='section'+$scope.sectionNumber;
+          $scope.currentQuestion='Q1';
+          sectionTransition();
+        }
+      };
 
-    	}
+    var resultatTransition = function () {
+    //alert("result transition")
+      $('#result-bubble').addClass('animated flipInX');
+      $('#result-bubble').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            $('#result-bubble').removeClass('animated flipInX');
+          });
 
-     var resultatTransition = function () {
-        //alert("result transition")
-        $('#result-bubble').addClass('animated flipInX');
-          $('#result-bubble').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-           $('#result-bubble').removeClass('animated flipInX');
-        });
+    };
 
-     }
+    var questionTransition = function () {
+      
+      $('#question-bubble').addClass('animated flipInX');
+      $('#question-bubble').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            $('#question-bubble').removeClass('animated flipInX');
+          });
+    };
 
-     var questionTransition = function () {
-        //alert("question transition")
+    var sectionTransition = function () {
 
-        $('#question-bubble').addClass('animated flipInX');
-        $('#question-bubble').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-           $('#question-bubble').removeClass('animated flipInX');
-        });
-     }
+      $('#question-bubble').addClass('animated flipInX');
+      $('#question-bubble').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            $('#question-bubble').removeClass('animated flipInX');
+          });
 
-     var sectionTransition = function () {
-
-         $('#question-bubble').addClass('animated flipInX');
-           $('#question-bubble').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
-              $('#question-bubble').removeClass('animated flipInX');
-        });
-
-     }
+    };
 
 
-      //controller for go to previous question 
+    //controller for go to previous question 
 
-      $scope.gotoprevious = function () {
+    $scope.gotoprevious = function () {
 
          /*if($scope.sectionNumber>1 {
             $scope.sectionNumber--;
@@ -148,38 +127,32 @@ angular.module('fcaTreeApp')
 
           }*/
 
-          console.log($scope.steps);
+         // console.log($scope.steps);
 
 
-      }
+    };
 
 
-      $scope.sectionchange = function (s) {
+    $scope.sectionchange = function (s) {
 
-          //alert("about to change section")
-       // console.log("about to change the section",s);
         // whent the sectiin changes 
           $scope.sectionNumber=s;
-          $scope.currentSection="section"+$scope.sectionNumber;
-          $scope.currentQuestion="Q1";
+          $scope.currentSection='section'+$scope.sectionNumber;
+          $scope.currentQuestion='Q1';
           $scope.questionmode = true;
           $scope.resultmode = false;
 
 
-      }
+        };
 
-    	 // loading data from JSONP
-       	 
+        // loading data from JSONP
 
-       	 questionService.getQuestions().success(function (response) {
-       	    $scope.appReady = true;
-       	 		$scope.questions = response;
-       	 		//$scope.currentSection=response.sections.section1
+    questionService.getQuestions().success(function (response) {
+          $scope.appReady = true;
+          $scope.questions = response;
+          //$scope.currentSection=response.sections.section1
 
-
-     
-       
-       });
+        });
 
 
   });
