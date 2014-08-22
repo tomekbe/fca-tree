@@ -3,7 +3,7 @@
 <h3 class="news-header red">Decision Tool</h3>
 <!--{{questions.sections[currentSection].name}}-->
 <!-- App screen -->
-<div ng-show="appReady">
+<div ng-show="appReady" id="dec-tool-wrap">
 			<div class="tabs clearfix" >
 					<span ng-repeat="sec in questions.sections" ng-click="sectionchange($index+1)" 
 						  ng-class="{tabactive:questions.sections[currentSection].name==sec.name,
@@ -14,6 +14,15 @@
 
 
 		<div id="q-r-wrap" class="clearfix">
+
+			 <div id="disclaimer" ng-show="disclaimermode">
+			  <p style="font-weight:bolder;font-size:11px">Before you start, please read the information below:</p>
+			  <ul style="font-weight:bolder;font-size:11px" >
+			  	<li>This tool does not apply if you are: a local authority; a firm that is already authorised by either the FCA or the PRA; or a firm that plans to carry on a non-credit regulated activity. You should instead <a href="http://www.fca.org.uk/firms/firm-types/consumer-credit/authorisation/apply">click here</a> for information on how to apply.</li>
+				<li>If any of your activities are full permission you will need to apply for full permission, even if some of your activities would otherwise qualify for limited permission.</li> 
+                <li>When we refer to "you", we are referring to your firm.</li>
+			  </ul>
+			</div>
 			<!-- resultat -->
 			<div id="result-bubble" ng-hide="questionmode" class="animate-show">	
 				<p ng-bind-html="questions.sections[currentSection].results[currentResultat]" style="font-weight:bold"></p>
@@ -41,12 +50,7 @@
 			<!-- disclaimer under the the question -->
 			<div id="tree-info">
 	
-			  <p style="font-weight:bolder;font-size:11px">Before you start, please read the information below:</p>
-			  <ul style="font-weight:bolder;font-size:11px" >
-			  	<li>This tool does not apply if you are: a local authority; a firm that is already authorised by either the FCA or the PRA; or a firm that plans to carry on a non-credit regulated activity. You should instead <a href="http://www.fca.org.uk/firms/firm-types/consumer-credit/authorisation/apply">click here</a> for information on how to apply.</li>
-				<li>If any of your activities are full permission you will need to apply for full permission, even if some of your activities would otherwise qualify for limited permission.</li> 
-                <li>When we refer to "you", we are referring to your firm.</li>
-			  </ul>
+		
 			  <p style="font-style:italic;font-size:11px">Use this tool to decide whether your firm needs to apply for full or limited permission.</p>
 			  <p style="font-style:italic;font-size:11px">
 			  	If there are any terms that you don’t understand, please read our <a href="http://view-it.co.uk/preview/fca/jb/#/">jargon buster</a>. Once you’ve completed the decision tool, use either the full permission or limited permission checklist to help you prepare your application.
@@ -66,33 +70,3 @@
 <div ng-show="!appReady"> <p>Loading the content...</p></div>
 
 
-
-
-
-<!-- helper section -->
-<!--
-<div id="tree-foot">
-	<a href="#">link1</a>
-	<a href="#">link2</a>
-</div>
--->
-
-
-
-
-
-
-<!--<div ng-repeat="item in questions.sections">
-
-  {{item.name}}
-  <hr/>
-  <ul ng-repeat="o in item.questions">
-    <li>{{o.Q}} {{o.Y}} {{o.N}}</li>
-  </ul>
-
-
-</div>-->
-
-
-
-<!--{{currentQuestions}}-->

@@ -7,6 +7,8 @@ angular.module('fcaTreeApp')
     $scope.appReady = false;
     $scope.resultmode = false;
     $scope.questionmode = true;
+
+    $scope.disclaimermode = true;
     $scope.resultFullOrLimited = false;
     // start with section1 by default;
     $scope.steps = [];
@@ -24,6 +26,8 @@ angular.module('fcaTreeApp')
     
     // controllers for YES BUTTON
     $scope.clickyes  = function() {
+        $scope.disclaimermode = false;
+
         var cString =	($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y).charAt(0);
         var cString2 =($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].Y).charAt(1);
         
@@ -58,6 +62,9 @@ angular.module('fcaTreeApp')
 
       // controller for NO BUTTON
     $scope.clickno = function () {
+
+        $scope.disclaimermode = false;
+
         var cString =	($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N).charAt(0);
         var cString2 =($scope.questions.sections[$scope.currentSection].questions[$scope.currentQuestion].N).charAt(1);
 
@@ -116,6 +123,7 @@ angular.module('fcaTreeApp')
 
     };
 
+  
 
     //controller for go to previous question 
 
@@ -136,6 +144,12 @@ angular.module('fcaTreeApp')
     $scope.sectionchange = function (s) {
 
         // whent the sectiin changes 
+
+          if(s===1) {
+            $scope.disclaimermode = true;
+          }
+
+
           $scope.sectionNumber=s;
           $scope.currentSection='section'+$scope.sectionNumber;
           $scope.currentQuestion='Q1';

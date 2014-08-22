@@ -31,4 +31,4 @@ setTimeout(function() {
       //all.setAttribute('ng-animate',"'slide'");
       angular.bootstrap(body, ['fcaTreeApp']);
       //document.getElementById('loader').style.display='none';//alert("fix for IE8");
-    },500);
+    },750);
