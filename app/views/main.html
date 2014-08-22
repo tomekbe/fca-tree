@@ -16,11 +16,12 @@
 		<div id="q-r-wrap" class="clearfix">
 
 			 <div id="disclaimer" ng-show="disclaimermode">
-			  <p style="font-weight:bolder;font-size:11px">Before you start, please read the information below:</p>
+			 	<p>This tool can help you decide whether your firm needs to apply for full or limited permission.</p>
+			  <p style="font-weight:bolder;font-size:11px">Before you start, please be aware that:</p>
 			  <ul style="font-weight:bolder;font-size:11px" >
-			  	<li>This tool does not apply if you are: a local authority; a firm that is already authorised by either the FCA or the PRA; or a firm that plans to carry on a non-credit regulated activity. You should instead <a href="http://www.fca.org.uk/firms/firm-types/consumer-credit/authorisation/apply">click here</a> for information on how to apply.</li>
-				<li>If any of your activities are full permission you will need to apply for full permission, even if some of your activities would otherwise qualify for limited permission.</li> 
-                <li>When we refer to "you", we are referring to your firm.</li>
+			  	<li>if any of your activities require full permission you have to apply for full permission, even if most of your activities would otherwise qualify for limited permission.</li>
+				<li>instead of using this tool, all local authorities, firms already authorised by the FCA or PRA, and firms planning to carry on non-credit regulated activity should instead find out more about <a href="http://www.fca.org.uk/firms/firm-types/consumer-credit/authorisation" target="_blank"> how to apply for authorisation</a></li> 
+           
 			  </ul>
 			</div>
 			<!-- resultat -->
@@ -40,8 +41,13 @@
 			<!-- current Question -->
 			<div id="question-bubble" ng-show="questionmode" class="animate-show"> 
 				<p ng-bind-html="questions.sections[currentSection].questions[currentQuestion].Q"></p>
-				<button ng-click = "clickyes()" class="btn btn-small">YES</button>
-				<button ng-click = "clickno()" class="btn btn-small">NO</button>
+				<div style="margin:5px">
+				<button ng-click = "clickyes()" class="btn btn-small">{{questions.sections[currentSection].questions[currentQuestion].BYES}}</button><span> {{questions.sections[currentSection].questions[currentQuestion].BYES_EXTRA}}</span>
+				</div>
+
+				<div style="margin:5px">
+				<button ng-click = "clickno()" class="btn btn-small">{{questions.sections[currentSection].questions[currentQuestion].BNO}}</button><span> {{questions.sections[currentSection].questions[currentQuestion].NO_EXTRA}} </span>
+				</div>
 				<!--<button ng-click ="gotoprevious()">go to the previous question</button>-->
 			</div>
 			<!-- the end of current question -->
@@ -51,9 +57,9 @@
 			<div id="tree-info">
 	
 		
-			  <p style="font-style:italic;font-size:11px">Use this tool to decide whether your firm needs to apply for full or limited permission.</p>
+			
 			  <p style="font-style:italic;font-size:11px">
-			  	If there are any terms that you don’t understand, please read our <a href="http://view-it.co.uk/preview/fca/jb/#/">jargon buster</a>. Once you’ve completed the decision tool, use either the full permission or limited permission checklist to help you prepare your application.
+			  	If there are any terms that you don’t understand, please read our <a href="http://view-it.co.uk/preview/fca/jb/#/" target="_blank">jargon buster</a>. Once you’ve completed the decision tool, use either the full permission or limited permission checklist to help you prepare your application.
 			  </p>
 
 			</div>
