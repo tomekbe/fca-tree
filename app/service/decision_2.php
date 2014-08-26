@@ -14,7 +14,7 @@ $data = (object)array(
                 "questions"=>array(
                     "Q1"=>(object)array (
 
-                        "Q"=>"<p>Do you carry on any credit-related regulated activities? See our <a href='http://www.fca.org.uk/your-fca/documents/credit-ready-jargon-buster' target='_blank'>jargon buster</a> for the full list.</p>",
+                        "Q"=>"<p>Do you carry on any credit-related regulated activities? See our <a href='http://view-it.co.uk/preview/fca/jb/#/' target='_blank'>jargon buster</a> for the full list.</p>",
                         "Y"=>"Q2",
                         "N"=>"R1",
                         "BYES"=>'YES',
