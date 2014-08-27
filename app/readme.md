@@ -25,6 +25,7 @@ index.html
 		/styles/mains.css
 				animate.css
 		/views/main.html
+		/service/decision_2.php
 
 
 
@@ -113,3 +114,6 @@ and accessed in the app as a service in
 	/scripts/controllers/main.js
 
 http://view-it.co.uk/services/fca/decision_2.php?callback=JSON_CALLBACK
+
+
+The php file generating it is in servi
