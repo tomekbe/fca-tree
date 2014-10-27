@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $("#fca-app-wrap").append("<div id='fca-app'>This message shows until this div has not been bootstraped x</div>");	  
+    $("#fca-app-wrap").append("<div id='fca-app'>Loading Decision Tree</div>");	  
 
     
     $("head").append("<script src='bower_components/angular/angular.js'></script>");
